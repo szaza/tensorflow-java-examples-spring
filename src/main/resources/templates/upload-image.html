@@ -16,22 +16,68 @@
         </div>
         <div class="container">
             <div class="row mt-4">
+                <h2>Upload and detect objects on your image</h2>
+                <p>
+                    The uploaded file cannot be larger than 300KB. The optimal resolution
+                    is 416x416, because the neural network resize the image in the pre-processing phase.
+                </p>
+            </div>
+            <div class="row">
                 <form method="POST" enctype="multipart/form-data" action="/">
                     <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th colspan="3">Upload your image here</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <tr>
                                 <td>File to upload:</td>
                                 <td><input type="file" name="file"/></td>
-                                <td><input type="submit" value="Upload"/></td>
+                                <td><input type="submit" value="Upload and recognize"/></td>
                             </tr>
                         </tbody>
                     </table>
                 </form>
+            </div>
+            <div class="row">
+                <div class="alert alert-info" role="alert">
+                    <strong>Important!</strong> The upload directory is cleaned up in each hour.
+                </div>
+            </div>
+            <div class="row">
+                <p>
+                    This program recognizes the following objects:
+                </p>
+                <table class="table table-bordered">
+                    <tbody>
+                     <tr>
+                         <td>
+                             <ul>
+                                 <li>aeroplane</li>
+                                 <li>bicycle</li>
+                                 <li>bird</li>
+                                 <li>boat</li>
+                                 <li>bottle</li>
+                                 <li>bus</li>
+                                 <li>car</li>
+                                 <li>cat</li>
+                                 <li>chair</li>
+                                 <li>cow</li>
+                             </ul>
+                         </td>
+                         <td>
+                             <ul>
+                                 <li>diningtable</li>
+                                 <li>dog</li>
+                                 <li>horse</li>
+                                 <li>motorbike</li>
+                                 <li>person</li>
+                                 <li>pottedplant</li>
+                                 <li>sheep</li>
+                                 <li>sofa</li>
+                                 <li>train</li>
+                                 <li>tvmonitor</li>
+                             </ul>
+                         </td>
+                     </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>
