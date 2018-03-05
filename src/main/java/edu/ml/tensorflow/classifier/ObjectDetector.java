@@ -41,13 +41,14 @@ public class ObjectDetector {
     /**
      * Detect objects on the given image
      * @param imageLocation the location of the image
+     * @return location of the labeled image
      */
-    public void detect(final String imageLocation) {
+    public String detect(final String imageLocation) {
         byte[] image = IOUtil.readAllBytesOrExit(imageLocation);
         try (Tensor<Float> normalizedImage = normalizeImage(image)) {
             List<Recognition> recognitions = YOLOClassifier.getInstance().classifyImage(executeYOLOGraph(normalizedImage), LABELS);
             printToConsole(recognitions);
-            ImageUtil.getInstance().labelImage(image, recognitions, IOUtil.getFileName(imageLocation));
+            return ImageUtil.getInstance().labelImage(image, recognitions, IOUtil.getFileName(imageLocation));
         }
     }
 

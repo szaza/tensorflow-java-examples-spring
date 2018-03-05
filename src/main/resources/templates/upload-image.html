@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TensorFlow Java API with YOLO</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+              integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"/>
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+                integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+                integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+                integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top navbar-inverse bg-inverse">
+            <div class="navbar-brand">TensorFlow Java API with YOLO sample application</div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <form method="POST" enctype="multipart/form-data" action="/">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="3">Upload your image here</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>File to upload:</td>
+                                <td><input type="file" name="file"/></td>
+                                <td><input type="submit" value="Upload"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -11,12 +11,9 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @EnableConfigurationProperties(StorageProperties.class)
 public class Application {
-    //private final static String IMAGE = "/image/eagle.jpg";
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-//        ObjectDetector objectDetector = new ObjectDetector();
-//        objectDetector.detect(IMAGE);
     }
 
     @Bean

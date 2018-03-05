@@ -4,13 +4,13 @@ package edu.ml.tensorflow;
  * Configuration file for TensorFlow Java Yolo application
  */
 public interface Config {
-    String GRAPH_FILE = "/YOLO/yolo-voc.pb";
-    String LABEL_FILE = "/YOLO/yolo-voc-labels.txt";
+    String GRAPH_FILE = "./graph/YOLO/yolo-voc.pb";
+    String LABEL_FILE = "./graph/YOLO/yolo-voc-labels.txt";
 
     // Params used for image processing
     int SIZE = 416;
     float MEAN = 255f;
 
     // Output directory
-    String OUTPUT_DIR = "./sample";
+    String OUTPUT_DIR = "./predicted";
 }

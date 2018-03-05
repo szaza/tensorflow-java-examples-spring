@@ -18,11 +18,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 @Service
 public class FileSystemStorageService implements StorageService {
-
     private final Path rootLocation;
 
     @Autowired
@@ -31,7 +31,7 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public void store(MultipartFile file) {
+    public String store(MultipartFile file) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         try {
             if (file.isEmpty()) {
@@ -39,12 +39,12 @@ public class FileSystemStorageService implements StorageService {
             }
             if (filename.contains("..")) {
                 // This is a security check
-                throw new StorageException(
-                        "Cannot store file with relative path outside current directory "
-                                + filename);
+                throw new StorageException("Cannot store file with relative path outside current directory " + filename);
             }
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(filename),
+            String newFileName = UUID.randomUUID() + ".jpg";
+            Files.copy(file.getInputStream(), this.rootLocation.resolve(newFileName),
                     StandardCopyOption.REPLACE_EXISTING);
+            return newFileName;
         }
         catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);

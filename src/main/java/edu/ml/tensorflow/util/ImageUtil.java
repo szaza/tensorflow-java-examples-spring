@@ -41,8 +41,9 @@ public class ImageUtil {
      * Label image with classes and predictions given by the ThensorFLow
      * @param image buffered image to label
      * @param recognitions list of recognized objects
+     * @return location of the labeled image
      */
-    public void labelImage(final byte[] image, final List<Recognition> recognitions, final String fileName) {
+    public String labelImage(final byte[] image, final List<Recognition> recognitions, final String fileName) {
         BufferedImage bufferedImage = imageUtil.createImageFromBytes(image);
         float scaleX = (float) bufferedImage.getWidth() / (float) Config.SIZE;
         float scaleY = (float) bufferedImage.getHeight() / (float) Config.SIZE;
@@ -57,14 +58,22 @@ public class ImageUtil {
         }
 
         graphics.dispose();
-        saveImage(bufferedImage, Config.OUTPUT_DIR + "/" + fileName);
+        return saveImage(bufferedImage, Config.OUTPUT_DIR + "/" + fileName);
     }
 
-    public void saveImage(final BufferedImage image, final String target) {
+    /**
+     *
+     * @param image to save
+     * @param target to save image
+     * @return location of the labeled image
+     */
+    public String saveImage(final BufferedImage image, final String target) {
         try {
             ImageIO.write(image,"jpg", new File(target));
-        } catch (IOException e) {
+            return target;
+        } catch (IOException ex) {
             LOGGER.error("Unagle to save image {}!", target);
+            throw new RuntimeException(ex);
         }
     }
 

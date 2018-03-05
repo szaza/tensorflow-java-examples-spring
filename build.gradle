@@ -31,7 +31,7 @@ dependencies {
     compile group: 'org.tensorflow', name: 'libtensorflow', version: '1.6.0'
 
     // Please read the requirements for the GPU support here: https://www.tensorflow.org/install/install_java
-    compile group: 'org.tensorflow', name: 'libtensorflow_jni_gpu', version: '1.6.0'
+    // compile group: 'org.tensorflow', name: 'libtensorflow_jni_gpu', version: '1.6.0'
 
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
     compile 'org.apache.commons:commons-math3:3.2'

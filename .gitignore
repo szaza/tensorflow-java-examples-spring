@@ -35,4 +35,4 @@ build/
 bin/
 log/
 out/
-src/main/resources/YOLO
+graph/YOLO/
