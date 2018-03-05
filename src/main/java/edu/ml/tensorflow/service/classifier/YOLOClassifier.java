@@ -1,4 +1,4 @@
-package edu.ml.tensorflow.classifier;
+package edu.ml.tensorflow.service.classifier;
 
 import edu.ml.tensorflow.model.BoundingBox;
 import edu.ml.tensorflow.model.BoxPosition;

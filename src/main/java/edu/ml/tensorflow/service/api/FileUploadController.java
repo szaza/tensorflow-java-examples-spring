@@ -1,6 +1,6 @@
 package edu.ml.tensorflow.service.api;
 
-import edu.ml.tensorflow.classifier.ObjectDetector;
+import edu.ml.tensorflow.service.classifier.ObjectDetector;
 import edu.ml.tensorflow.service.exception.ServiceException;
 import edu.ml.tensorflow.service.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +18,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Map;
 
 @Controller
 public class FileUploadController {
     private final StorageService storageService;
+    private final ObjectDetector objectDetector;
 
     @Autowired
-    public FileUploadController(StorageService storageService) {
+    public FileUploadController(final StorageService storageService, final ObjectDetector objectDetector) {
         this.storageService = storageService;
+        this.objectDetector = objectDetector;
     }
 
     @GetMapping("/")
@@ -43,21 +46,17 @@ public class FileUploadController {
 
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file") MultipartFile file, Model model) {
-        String originalImage = "/upload-dir/" + storageService.store(file);
-        String predictedImage = predict(originalImage);
+        String originalImagePath = "/upload-dir/" + storageService.store(file);
+        Map<String, Object> result = objectDetector.detect("." + originalImagePath);
         model.addAttribute("originalName", file.getOriginalFilename());
-        model.addAttribute("originalImage", originalImage);
-        model.addAttribute("predictedImage", predictedImage);
+        model.addAttribute("originalImage", originalImagePath);
+        model.addAttribute("predictedImage", result.get("labeledFilePath"));
+        model.addAttribute("recognitions", result.get("recognitions"));
         return "display-result";
     }
 
     @ExceptionHandler(ServiceException.class)
     public ResponseEntity<?> handleStorageFileNotFound(ServiceException ex) {
         return ResponseEntity.notFound().build();
-    }
-
-    private String predict(final String fileName) {
-        ObjectDetector objectDetector = new ObjectDetector();
-        return objectDetector.detect("." + fileName);
     }
 }

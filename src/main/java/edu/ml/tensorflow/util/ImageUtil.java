@@ -1,6 +1,6 @@
 package edu.ml.tensorflow.util;
 
-import edu.ml.tensorflow.Config;
+import edu.ml.tensorflow.ApplicationProperties;
 import edu.ml.tensorflow.model.BoxPosition;
 import edu.ml.tensorflow.model.Recognition;
 import org.slf4j.Logger;
@@ -20,18 +20,20 @@ import java.util.List;
 public class ImageUtil {
     private final static Logger LOGGER = LoggerFactory.getLogger(ImageUtil.class);
     private static ImageUtil imageUtil;
+    private ApplicationProperties applicationProperties;
 
-    private ImageUtil() {
-        IOUtil.createDirIfNotExists(new File(Config.OUTPUT_DIR));
+    private ImageUtil(final ApplicationProperties applicationProperties) {
+        this.applicationProperties = applicationProperties;
+        IOUtil.createDirIfNotExists(new File(applicationProperties.getOutputDir()));
     }
 
     /**
      * It returns the singleton instance of this class.
      * @return ImageUtil instance
      */
-    public static ImageUtil getInstance() {
+    public static ImageUtil getInstance(final ApplicationProperties applicationProperties) {
         if (imageUtil == null) {
-            imageUtil = new ImageUtil();
+            imageUtil = new ImageUtil(applicationProperties);
         }
 
         return imageUtil;
@@ -45,9 +47,10 @@ public class ImageUtil {
      */
     public String labelImage(final byte[] image, final List<Recognition> recognitions, final String fileName) {
         BufferedImage bufferedImage = imageUtil.createImageFromBytes(image);
-        float scaleX = (float) bufferedImage.getWidth() / (float) Config.SIZE;
-        float scaleY = (float) bufferedImage.getHeight() / (float) Config.SIZE;
+        float scaleX = (float) bufferedImage.getWidth() / (float) applicationProperties.getImageSize();
+        float scaleY = (float) bufferedImage.getHeight() / (float) applicationProperties.getImageSize();
         Graphics2D graphics = (Graphics2D) bufferedImage.getGraphics();
+        graphics.setColor(Color.green);
 
         for (Recognition recognition: recognitions) {
             BoxPosition box = recognition.getScaledLocation(scaleX, scaleY);
@@ -58,7 +61,7 @@ public class ImageUtil {
         }
 
         graphics.dispose();
-        return saveImage(bufferedImage, Config.OUTPUT_DIR + "/" + fileName);
+        return saveImage(bufferedImage, applicationProperties.getOutputDir() + "/" + fileName);
     }
 
     /**

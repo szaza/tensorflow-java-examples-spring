@@ -1,5 +1,6 @@
-package edu.ml.tensorflow.classifier;
+package edu.ml.tensorflow.service.classifier;
 
+import edu.ml.tensorflow.ApplicationProperties;
 import edu.ml.tensorflow.model.Recognition;
 import edu.ml.tensorflow.util.GraphBuilder;
 import edu.ml.tensorflow.util.IOUtil;
@@ -7,31 +8,34 @@ import edu.ml.tensorflow.util.ImageUtil;
 import edu.ml.tensorflow.util.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.tensorflow.Graph;
 import org.tensorflow.Output;
 import org.tensorflow.Session;
 import org.tensorflow.Tensor;
 
 import java.nio.FloatBuffer;
+import java.util.HashMap;
 import java.util.List;
-
-import static edu.ml.tensorflow.Config.GRAPH_FILE;
-import static edu.ml.tensorflow.Config.LABEL_FILE;
-import static edu.ml.tensorflow.Config.MEAN;
-import static edu.ml.tensorflow.Config.SIZE;
+import java.util.Map;
 
 /**
  * ObjectDetector class to detect objects using pre-trained models with TensorFlow Java API.
  */
+@Service
 public class ObjectDetector {
     private final static Logger LOGGER = LoggerFactory.getLogger(ObjectDetector.class);
     private byte[] GRAPH_DEF;
     private List<String> LABELS;
+    private ApplicationProperties applicationProperties;
 
-    public ObjectDetector() {
+    @Autowired
+    public ObjectDetector(final ApplicationProperties applicationProperties) {
+        this.applicationProperties = applicationProperties;
         try {
-            GRAPH_DEF = IOUtil.readAllBytesOrExit(GRAPH_FILE);
-            LABELS = IOUtil.readAllLinesOrExit(LABEL_FILE);
+            GRAPH_DEF = IOUtil.readAllBytesOrExit(applicationProperties.getGraph());
+            LABELS = IOUtil.readAllLinesOrExit(applicationProperties.getLabel());
         } catch (ServiceException ex) {
             LOGGER.error("Download one of my graph file to run the program! \n" +
                     "You can find my graphs here: https://drive.google.com/open?id=1GfS1Yle7Xari1tRUEi2EDYedFteAOaoN");
@@ -41,14 +45,19 @@ public class ObjectDetector {
     /**
      * Detect objects on the given image
      * @param imageLocation the location of the image
-     * @return location of the labeled image
+     * @return a map with location of the labeled image and recognitions
      */
-    public String detect(final String imageLocation) {
+    public Map<String, Object> detect(final String imageLocation) {
         byte[] image = IOUtil.readAllBytesOrExit(imageLocation);
         try (Tensor<Float> normalizedImage = normalizeImage(image)) {
             List<Recognition> recognitions = YOLOClassifier.getInstance().classifyImage(executeYOLOGraph(normalizedImage), LABELS);
             printToConsole(recognitions);
-            return ImageUtil.getInstance().labelImage(image, recognitions, IOUtil.getFileName(imageLocation));
+            String labeledFilePath = ImageUtil.getInstance(applicationProperties).labelImage(image, recognitions, IOUtil.getFileName(imageLocation));
+
+            Map<String, Object> result = new HashMap();
+            result.put("labeledFilePath", labeledFilePath);
+            result.put("recognitions", recognitions);
+            return result;
         }
     }
 
@@ -70,8 +79,8 @@ public class ObjectDetector {
                                                     graphBuilder.constant("input", imageBytes), 3),
                                             Float.class),
                                     graphBuilder.constant("make_batch", 0)),
-                            graphBuilder.constant("size", new int[]{SIZE, SIZE})),
-                    graphBuilder.constant("scale", MEAN));
+                            graphBuilder.constant("size", new int[]{applicationProperties.getImageSize(), applicationProperties.getImageSize()})),
+                    graphBuilder.constant("scale", applicationProperties.getImageMean()));
 
             try (Session session = new Session(graph)) {
                 return session.runner().fetch(output.op().name()).run().get(0).expect(Float.class);
