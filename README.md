@@ -19,4 +19,7 @@ Run it with the command `./gradlew bootRun`
 Open the [http://localhot:8080](http://localhot:8080) and you see the webpage.<br/>
 If you want to understand better how the image recognition part works, have a look my previous project here: [https://github.com/szaza/tensorflow-java-yolo](https://github.com/szaza/tensorflow-java-yolo)
 
-This software will be deployed soon to the google cloud, so you can try it out unless installing it.
+#### Demo application
+
+Deployed to Heroku: https://still-crag-64816.herokuapp.com/<br/>
+Unfortunatelly, only the tiny YOLO runs with 512M memory.
