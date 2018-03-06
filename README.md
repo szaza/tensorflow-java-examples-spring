@@ -21,5 +21,7 @@ If you want to understand better how the image recognition part works, have a lo
 
 #### Demo application
 
-Deployed to Heroku: https://still-crag-64816.herokuapp.com/<br/>
+Deployed to **Google cloud**: http://35.231.120.117:8080/
+
+Deployed to **Heroku**: https://still-crag-64816.herokuapp.com/<br/>
 Unfortunatelly, only the tiny YOLO runs with 512M memory.
