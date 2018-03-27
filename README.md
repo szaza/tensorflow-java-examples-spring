@@ -1,6 +1,6 @@
 # TensorFlow Java tutorial with Spring Framework and Gradle
 ## Object detection server application
-Object detection server side application sample program written in Java. It uses the TensorFlow Java API with a trained YOLO model. The server application is implemented with Spring Framework and it is built by Gradle.
+Object detection server side application sample program written in Java. It uses the TensorFlow Java API with a trained YOLOv2 model. The server application is implemented with Spring Framework and it is built by Gradle.
 
 #### How it works?
 
@@ -17,12 +17,11 @@ Before compiling the source code you have to place the frozen graph and the labe
 Compile the code by typing `./gradlew clean build` in the terminal window.<br/>
 Run it with the command `./gradlew bootRun`
 
-Open the [http://localhot:8080](http://localhot:8080) and you see the webpage.<br/>
+Open the [http://localhot:8080](http://localhot:8080) and you should see the webpage.<br/>
 If you want to understand better how the image recognition part works, have a look at my previous project here: [Java Tensorflow example application](https://github.com/szaza/tensorflow-java-yolo)
 
 #### Demo application
 
 Deployed to **Google cloud**: http://35.231.120.117:8080/
 
-Deployed to **Heroku**: https://still-crag-64816.herokuapp.com/<br/>
-Unfortunatelly, only the tiny YOLO runs with 512M memory.
+Deployed to **Heroku** with a tiny-yolo model: https://still-crag-64816.herokuapp.com/
