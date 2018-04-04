@@ -18,7 +18,7 @@ Compile the code by typing `./gradlew clean build` in the terminal window.<br/>
 Run it with the command `./gradlew bootRun`
 
 Open the [http://localhot:8080](http://localhot:8080) and you should see the webpage.<br/>
-If you want to understand better how the image recognition part works, have a look at my previous project here: [Java Tensorflow example application](https://github.com/szaza/tensorflow-java-yolo)
+If you want to understand better how the image recognition part works, have a look at my previous project here: [Tensorflow Java API example application](https://github.com/szaza/tensorflow-example-java)
 
 #### Demo application
 
