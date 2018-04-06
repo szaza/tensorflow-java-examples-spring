@@ -24,7 +24,7 @@ Strongly recommended to install:
 
 Download the frozen graph and the label file
 
-Before compiling the source code you have to place the frozen graph and the label file into the `./graph/` directory. Download one of my graphs from my [google drive](https://drive.google.com/drive/folders/1GfS1Yle7Xari1tRUEi2EDYedFteAOaoN). There are two graphs: tiny-yolo-voc.pb and yolo-voc.pb. The tiny-yolo.pb has a lower size, however it is less accurate than the yolo-voc.pb.
+Before compiling the source code you have to place the frozen graph and the label file into the `./graph/YOLO` directory. Download one of my graphs from my [google drive](https://drive.google.com/drive/folders/1GfS1Yle7Xari1tRUEi2EDYedFteAOaoN). There are two graphs: tiny-yolo-voc.pb and yolo-voc.pb. The tiny-yolo.pb has a lower size, however it is less accurate than the yolo-voc.pb. Modify the [application.yml](https://github.com/szaza/tensorflow-java-examples-spring/blob/master/src/main/resources/application.yml) configuration file if it is necessary. Here you can increase the file upload limit also.
 
 Compile with Gradle
 
