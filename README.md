@@ -12,7 +12,21 @@ Step1: upload your image
 <img src="https://github.com/szaza/java-tensorflow-spring/blob/master/sample/object-detection-page.jpg" alt="TensorFlow Java API object detection page" title="TensorFlow Java API object detection page" width="600"/><br/>Step2: display the recognized objects
 
 #### Compile and run
+
+Preconditions:
+- Java JDK 1.8 or greater;
+- TensorFlow 1.6 or grater;
+- Git version control system;
+
+Strongly recommended to install:
+- nVidia CUDA Toolkit 8.0 or higher version;
+- nVidia cuDNN GPU accelerated deep learning framework;
+
+Download the frozen graph and the label file
+
 Before compiling the source code you have to place the frozen graph and the label file into the `./graph/` directory. Download one of my graphs from my [google drive](https://drive.google.com/drive/folders/1GfS1Yle7Xari1tRUEi2EDYedFteAOaoN). There are two graphs: tiny-yolo-voc.pb and yolo-voc.pb. The tiny-yolo.pb has a lower size, however it is less accurate than the yolo-voc.pb.
+
+Compile with Gradle
 
 Compile the code by typing `./gradlew clean build` in the terminal window.<br/>
 Run it with the command `./gradlew bootRun`
