@@ -36,6 +36,6 @@ If you want to understand better how the image recognition part works, have a lo
 
 #### Demo application
 
-Deployed to **Google cloud**: http://35.231.120.117:8080/
+Deployed to **Google cloud**: https://35.229.93.105:8080/
 
 Deployed to **Heroku** with a tiny-yolo model: https://still-crag-64816.herokuapp.com/
