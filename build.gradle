@@ -23,7 +23,7 @@ buildscript {
 }
 
 jar {
-    baseName = 'gs-uploading-files'
+    baseName = 'java-tensorflow-service'
     version =  '0.1.0'
 }
 
