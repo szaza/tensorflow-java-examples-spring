@@ -5,9 +5,11 @@ service: springboot
 health_check:
   enable_health_check: False
 
-manual_scaling:
-  instances: 1
-
-handlers:
-- url: /graph
-  static_dir: graph
+resources:
+  cpu: 2
+  memory_gb: 2.5
+  disk_size_gb: 10
+  volumes:
+  - name: ramdisk1
+    volume_type: tmpfs
+    size_gb: 0.5
