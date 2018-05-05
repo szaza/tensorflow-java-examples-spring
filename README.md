@@ -30,7 +30,7 @@ Before compiling the source code you have to place the frozen graph and the labe
 Compile the code by typing `./gradlew clean build` in the terminal window.<br/>
 Run it with the command `./gradlew bootRun`
 
-Open the [http://localhot:8080](http://localhot:8080) and you should see the webpage.<br/>
+Open the [http://localhost:8080](http://localhost:8080) and you should see the webpage.<br/>
 
 #### Demo application
 
