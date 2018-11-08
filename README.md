@@ -34,7 +34,7 @@ Open the [http://localhost:8080](http://localhost:8080) and you should see the w
 
 #### Demo application
 
-Deployed to **Google cloud**: http://35.229.93.105:8080/ <br/>
+Deployed to **Google cloud**: http://35.190.150.169:8080/ <br/>
 Deployed to **Heroku** with a tiny-yolo model: https://still-crag-64816.herokuapp.com/
 
 Have a look at my previous project for better understanding of the object detection part: [Tensorflow Java API example application](https://github.com/szaza/tensorflow-example-java) or visit my site: https://sites.google.com/view/tensorflow-example-java-api.
