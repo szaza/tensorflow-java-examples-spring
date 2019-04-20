@@ -34,7 +34,13 @@ Open the [http://localhost:8080](http://localhost:8080) and you should see the w
 
 #### Demo application
 
-Deployed to **Google cloud**: http://35.190.150.169:8080/ <br/>
 Deployed to **Heroku** with a tiny-yolo model: https://still-crag-64816.herokuapp.com/
 
 Have a look at my previous project for better understanding of the object detection part: [Tensorflow Java API example application](https://github.com/szaza/tensorflow-example-java) or visit my site: https://sites.google.com/view/tensorflow-example-java-api.
+
+## News about YoloV3 support
+
+The current solution doesn't support the YoloV3 model and unfortunately, I do not have time to implement it, however I would be very happy if I could help to implement and I could review a PR with this feture. 
+For this reason I've started a new branch here: https://github.com/szaza/tensorflow-java-examples-spring/tree/feature/add-yolov3-support; If you are interested in this feature and you would like to be a collabortor, please add a comment for this thread: https://github.com/szaza/tensorflow-java-examples-spring/issues/2;
+
+Many-many thank for any support!
